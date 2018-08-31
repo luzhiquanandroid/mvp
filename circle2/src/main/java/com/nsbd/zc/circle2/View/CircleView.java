@@ -1,10 +1,14 @@
 package com.nsbd.zc.circle2.View;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -63,13 +67,16 @@ public class CircleView extends View {
         mDistance = dip2px(getContext(), 50);//文字距离
         //外圆环的画笔
         mColorWheelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mColorWheelPaint.setColor(mWheelColor);
+        //mColorWheelPaint.setColor(mWheelColor);
+        LinearGradient linearGradient = new LinearGradient(100, 100, 500, 500,
+                getResources().getColor(R.color.startColor), getResources().getColor(R.color.endColor), Shader.TileMode.CLAMP);
+        mColorWheelPaint.setShader(linearGradient);
         mColorWheelPaint.setStyle(Paint.Style.STROKE);
         mColorWheelPaint.setStrokeWidth(circleStrokeWidth);//圆圈的线条粗细
         mColorWheelPaint.setStrokeCap(Paint.Cap.ROUND);//开启显示边缘为圆形
         //默认圆的画笔
         mDefaultWheelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mDefaultWheelPaint.setColor(getResources().getColor(R.color.gray));
+        mDefaultWheelPaint.setColor(getResources().getColor(R.color.startColor));
         mDefaultWheelPaint.setStyle(Paint.Style.STROKE);
         mDefaultWheelPaint.setStrokeWidth(circleStrokeWidth);//圆圈的线条粗细
         mDefaultWheelPaint.setStrokeCap(Paint.Cap.ROUND);//开启显示边缘为圆形
