@@ -2,6 +2,7 @@ package com.nsbd.zc.circle2.View;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -26,13 +27,13 @@ public class CircleView extends View {
     private Paint textPaint;//中间数值文字的画笔
     private Paint textDesPaint;//描述文字的画笔
     private float mColorWheelRadius;
-    private float circleStrokeWidth;//圆圈的线条粗细
+    private int circleStrokeWidth;//圆圈的线条粗细
     private float pressExtraStrokeWidth;
     private int mTextColor = getResources().getColor(R.color.colorAccent);//默认文字颜色
     private int mWheelColor = getResources().getColor(R.color.colorPrimary);//默认圆环颜色
 
     private String mText;
-    private String mTextDes;//文字的描述
+    private String mTextDes = "";//文字的描述
     private int mTextDesSize;//描述文字的大小
     private int mCount;//为了做动画
     private float mSweepAnglePer;//扇形弧度百分比
@@ -44,24 +45,30 @@ public class CircleView extends View {
 
     public CircleView(Context context) {
         super(context);
-        init(null, 0);
+        init(context, null, 0);
     }
 
     public CircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init(context, attrs, 0);
     }
 
     public CircleView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init(context, attrs, defStyle);
     }
 
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init(Context context, AttributeSet attrs, int defStyle) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleView);
+        circleStrokeWidth = (int) typedArray.getDimension(R.styleable.CircleView_circleStrokeWidth, 20);
+        pressExtraStrokeWidth = typedArray.getInteger(R.styleable.CircleView_pressExtraStrokeWidth, 2);
+
+        mText = typedArray.getString(R.styleable.CircleView_mText);
+        typedArray.recycle();
         //初始化一些值
-        circleStrokeWidth = dip2px(getContext(), 20);
-        pressExtraStrokeWidth = dip2px(getContext(), 2);
+        //circleStrokeWidth = dip2px(getContext(), circleStrokeWidth);
+        pressExtraStrokeWidth = dip2px(getContext(), pressExtraStrokeWidth);
         mTextSize = dip2px(getContext(), 45);
         mTextDesSize = dip2px(getContext(), 12);
         mDistance = dip2px(getContext(), 50);//文字距离
@@ -93,11 +100,16 @@ public class CircleView extends View {
         textDesPaint.setTextSize(mTextDesSize);
         textDesPaint.setTextAlign(Paint.Align.LEFT);
 
-        mText = "500";
+    }
+
+    public void setValue(Float mSweepAngle) {
+        // mText = "500";
         mTextDes = "信用额度";
-        mSweepAngle = 50;
+        //mSweepAngle = 30;
         anim = new BarAnimation();
         anim.setDuration(TIME);
+        anim.setFillAfter(true);
+        startCustomAnimation(mSweepAngle);
     }
 
     @Override
@@ -143,7 +155,8 @@ public class CircleView extends View {
         Toast.makeText(getContext(), mText, Toast.LENGTH_SHORT).show();
     }
 
-    public void startCustomAnimation() {
+    public void startCustomAnimation(Float animStart) {
+        mSweepAngle = animStart;
         this.startAnimation(anim);
     }
 
@@ -203,5 +216,21 @@ public class CircleView extends View {
     public static int dip2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
+    }
+
+    //监听器类接口
+
+    public static abstract interface OnClickListener {
+        public abstract void onClick(); //单击事件处理接口
+    }
+
+    OnClickListener listener = null;   //监听器类对象
+
+    //实现这个View的监听器
+
+    public void setOnClickListener(OnClickListener listener) {
+
+        this.listener = listener;   //引用监听器类对象,在这里可以使用监听器类的对象
+
     }
 }

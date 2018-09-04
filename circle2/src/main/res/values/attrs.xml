@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleView">
+        <attr name="circleStrokeWidth" format="dimension"></attr>
+        <attr name="pressExtraStrokeWidth" format="dimension"></attr>
+        <attr name="mTextSize" format="integer" />
+        <attr name="mTextDesSize" format="integer" />
+        <attr name="mText" format="string" />
+    </declare-styleable>
+</resources>
