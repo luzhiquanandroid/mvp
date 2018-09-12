@@ -2,11 +2,13 @@ package com.nsbd.zc.circle2
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import com.nsbd.zc.circle2.View.CircleView
+import com.nsbd.zc.circle2.View.ProgressBarView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +27,11 @@ class MainActivity : AppCompatActivity() {
             endF += -30f
             animStart += 30f
         }
+
+
+        val view = findViewById<View>(R.id.progress) as ProgressBarView
+        view.setDraggingEnabled(true)
+        view.setMax(1000)
     }
 
     private fun rotateAnim(startF: Float, endF: Float) {
