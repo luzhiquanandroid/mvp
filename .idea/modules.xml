@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/circle/circle.iml" filepath="$PROJECT_DIR$/circle/circle.iml" />
       <module fileurl="file://$PROJECT_DIR$/circle2/circle2.iml" filepath="$PROJECT_DIR$/circle2/circle2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/horpro/horpro.iml" filepath="$PROJECT_DIR$/horpro/horpro.iml" />
       <module fileurl="file://$PROJECT_DIR$/lzq_test_app_project.iml" filepath="$PROJECT_DIR$/lzq_test_app_project.iml" />
       <module fileurl="file://$PROJECT_DIR$/shapetv/shapetv.iml" filepath="$PROJECT_DIR$/shapetv/shapetv.iml" />
       <module fileurl="file://$PROJECT_DIR$/webview/webview.iml" filepath="$PROJECT_DIR$/webview/webview.iml" />
