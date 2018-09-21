@@ -67,8 +67,8 @@ public class ZzHorizontalProgressBar extends View {
         max = a.getInteger(R.styleable.ZzHorizontalProgressBar_zpb_max, 100);
         progress = a.getInteger(R.styleable.ZzHorizontalProgressBar_zpb_progress, 0);
         bgColor = a.getColor(R.styleable.ZzHorizontalProgressBar_zpb_bg_color, 0xffffff);
-        progressColor = a.getColor(R.styleable.ZzHorizontalProgressBar_zpb_pb_color, 0xff0063C0);
-        secondProgressColor = a.getColor(R.styleable.ZzHorizontalProgressBar_zpb_second_pb_color, 0x0063C0);
+        progressColor = a.getColor(R.styleable.ZzHorizontalProgressBar_zpb_pb_color, 0xFFFF5A3A);
+        secondProgressColor = a.getColor(R.styleable.ZzHorizontalProgressBar_zpb_second_pb_color, 0xFFFF3A5F);
         padding = a.getDimensionPixelSize(R.styleable.ZzHorizontalProgressBar_zpb_padding, 2);
         showSecondProgress = a.getBoolean(R.styleable.ZzHorizontalProgressBar_zpb_show_second_progress, false);
         secondProgress = a.getInteger(R.styleable.ZzHorizontalProgressBar_zpb_second_progress, 0);
@@ -102,7 +102,10 @@ public class ZzHorizontalProgressBar extends View {
         secondGradientPaint.setAntiAlias(true);
 
         bgPaint = new Paint();
-        bgPaint.setColor(bgColor);
+        //ZbgPaint.setColor(bgColor);
+        LinearGradient linearGradient = new LinearGradient(100, 100, 500, 500,
+                getResources().getColor(R.color.startColor), getResources().getColor(R.color.endColor), Shader.TileMode.CLAMP);
+        bgPaint.setShader(linearGradient);
         bgPaint.setStyle(Paint.Style.STROKE);
         bgPaint.setAntiAlias(true);
 
