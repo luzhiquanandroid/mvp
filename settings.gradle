@@ -1,1 +1,1 @@
-include ':app', ':circle', ':circle2', ':webview', ':shapetv', ':horpro'
+include ':app', ':circle', ':circle2', ':webview', ':shapetv', ':horpro', ':navigation', ':test'
